@@ -21,7 +21,7 @@ import {
 const Logo = () => (
     <span className="text-3xl font-bold">
       <span className="text-blue-900">Connect</span>
-      <span className="text-green-600">Pro</span>
+      <span className="text-teal-500">Pro</span>
     </span>
 );
 
@@ -38,24 +38,23 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          
+        <div className="flex items-center justify-between h-20 relative">
           <div className="flex-shrink-0">
             <Logo />
           </div>
-
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <a key={item.name} href={item.href} className="text-gray-700 hover:text-blue-900 font-medium rounded-md text-sm"> {item.name} </a> 
-              ))}
-            <Link to="/login" className="text-gray-700 hover:text-blue-900 font-medium rounded-md text-sm">
-              Login
-            </Link>
-            <Link to="/register" className="px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 text-sm font-medium shadow-md transition-colors">
-              Cadastrar
-            </Link>
+          <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 space-x-8">
+            {navItems.map((item) => ( <a key={item.name} href={item.href} className="text-gray-700 hover:text-blue-900 font-medium rounded-md text-sm"> {item.name} </a> 
+            ))}
           </div>
-
+          <div className="hidden md:flex items-center space-x-4">
+            <a href="/login" className="text-gray-700 hover:text-blue-900 font-medium rounded-md text-sm">
+              Login
+            </a>
+            <a href="/register" className="px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 text-sm font-medium shadow-md transition-colors">
+              Cadastrar
+            </a>
+          </div>
+            
           <div className="md:hidden">
             <button onClick={() => setIsOpen(!isOpen)} className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100">
               <span className="sr-only">Abrir menu</span>
@@ -73,12 +72,12 @@ const Navbar = () => {
                 {item.name}
               </a>
             ))}
-            <Link to="/login" className="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium" onClick={() => setIsOpen(false)}>
+            <a href="/login" className="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium" onClick={() => setIsOpen(false)}>
               Login
-            </Link>
-            <Link to="/register" className="block w-full text-left px-3 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 font-medium shadow-md transition-colors" onClick={() => setIsOpen(false)}>
+            </a>
+            <a href="/register" className="block w-full text-left px-3 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 font-medium shadow-md transition-colors" onClick={() => setIsOpen(false)}>
               Cadastrar
-            </Link>
+            </a>
           </div>
         </div>
       )}
@@ -88,7 +87,7 @@ const Navbar = () => {
 
 // --- Seção Hero (Introdução) ---
 const Hero = () => (
-  <section id="solucao" className="bg-gray-50">
+  <section id="solucao" className="bg-blue-100">
     <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 text-center justify-center">
       <h1 className="text-4xl font-extrabold text-blue-900 sm:text-5xl md:text-6xl">
         Conectando talentos ao futuro
@@ -97,16 +96,16 @@ const Hero = () => (
         Uma plataforma e-commerce para conectar profissionais e empresas, otimizando o processo de recrutamento com filtros inteligentes para "matches" mais precisos.
       </p>
       <div className="py-5 mt-10 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-        <Link  className="px-8 py-3 bg-blue-900 text-white text-lg font-medium rounded-lg hover:bg-blue-800 shadow-lg transform hover:scale-105 transition-all" onClick={() => setIsOpen(false)}>
-         Cadastre-se
-        </Link>
+        <a href="/register" className="px-6 py-4 bg-blue-900 text-white rounded-lg hover:bg-blue-800 text-sm font-medium shadow-md transition-colors">
+          Cadastrar-se Agora
+        </a>
       </div>
     </div>
   </section>
 );
 
 // --- Seção Público Alvo ---
-const TargetAudience = () => (
+const PublicoAlvo = () => (
   <section id="publico" className="bg-white py-24 sm:py-32">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center">
@@ -175,7 +174,7 @@ const features = [
   },
 ];
 
-const Features = () => (
+const Recursos = () => (
   <section id="recursos" className="bg-blue-900 py-24 sm:py-32">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center">
@@ -261,7 +260,7 @@ const nonFunctionalReqs = [
   { icon: CheckCircle, name: 'Usabilidade', description: 'Interface intuitiva e simplificada para todos os usuários.' },
 ];
 
-const Quality = () => (
+const Qualidade = () => (
   <section id="quality" className="bg-white py-24 sm:py-32">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-16">
@@ -290,19 +289,19 @@ const Quality = () => (
 
 // --- Footer ---
 const Footer = () => (
-  <footer className="bg-blue-500 text-white">
+  <footer className="bg-blue-100 text-white">
     <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col md:flex-row justify-between items-center">
         <div className="mb-6 md:mb-0">
           <Logo />
-          <p className="mt-4 text-blue-200 max-w-xs">
+          <p className="mt-4 text-blue-900 max-w-xs">
             Conectando talentos ao futuro
           </p>
         </div>
         <div className="text-center md:text-right">
-          <h4 className="text-lg font-semibold text-white">Projeto Integrado - 2º Semestre</h4>
-          <p className="text-blue-200">Análise e Desenvolvimento de Sistemas</p>
-          <p className="text-blue-200">Unisenac - Centro Universitário RS</p>
+          <h4 className="text-lg font-semibold text-blue-900">Projeto Integrado - 2º Semestre</h4>
+          <p className="text-blue-900">Análise e Desenvolvimento de Sistemas</p>
+          <p className="text-blue-900">Unisenac - Centro Universitário RS</p>
           <div className="mt-4 text-sm text-blue-900">
             <p>Desenvolvido por:</p>
             <p>Brian da Silva Guterres</p>
@@ -311,7 +310,7 @@ const Footer = () => (
           </div>
         </div>
       </div>
-      <div className="mt-8 border-t border-blue-800 pt-8 text-center text-blue-300 text-sm">
+      <div className="flex text-center text-blue-900 text-sm">
         <p>&copy; {new Date().getFullYear()} ConnectPro. Todos os direitos reservados.</p>
       </div>
     </div>
@@ -323,10 +322,10 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
-        <TargetAudience />
-        <Features />
+        <PublicoAlvo />
+        <Recursos />
         <Personas />
-        <Quality />
+        <Qualidade />
       </main>
       <Footer />
     </div>

@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react'; // Importa useState e useEff
 import { Link } from 'react-router-dom';
 import { Mail, Lock, User, UserPlus, Image } from 'lucide-react'; // Importa o ícone Image
 
-// Componente Logo (copiado do LoginScreen para consistência)
 const Logo = () => (
-  <a href="#" className="flex items-center justify-center mb-8">
+  <Link to="/" className="flex items-center justify-center mb-8">
     <img 
       src="/ConnectProLogo.png" 
       alt="ConnectPro Logo" 
-      className="h-12 w-auto" // Ajuste a altura (h-12 = 48px) conforme necessário
+      className="h-30 w-auto" 
     />
-  </a>
+  </Link>
 );
 
 const RegisterPage = () => {

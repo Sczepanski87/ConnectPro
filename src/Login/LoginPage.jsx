@@ -1,17 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // IMPORTANTE: Importar o Link
+import { Link } from 'react-router-dom'; 
 import { Mail, Lock, LogIn, User } from 'lucide-react';
 
-// Reutilizamos o componente Logo que já criamos para consistência
+
 const Logo = () => (
-  <a href="#" className="flex items-center justify-center mb-8">
-    {/* Substituímos o logo recriado pela imagem oficial */}
+  <Link to="/" className="flex items-center justify-center mb-8">
     <img 
       src="/ConnectProLogo.png" 
       alt="ConnectPro Logo" 
-      className="h-12 w-auto" // Ajuste a altura (h-12 = 48px) conforme necessário
+      className="h-30 w-auto" 
     />
-  </a>
+  </Link>
 );
 
 // Renomeado de LoginScreen para LoginPage para corresponder ao nome do arquivo
