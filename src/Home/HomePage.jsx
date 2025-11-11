@@ -33,6 +33,7 @@ const Navbar = () => {
     { name: 'Público-Alvo', href: '#publico' },
     { name: 'Recursos', href: '#recursos' },
     { name: 'Depoimentos', href: '#personas' },
+    { name: 'Qualidades', href: '#quality' },
   ];
 
   return (
@@ -47,7 +48,7 @@ const Navbar = () => {
             ))}
           </div>
           <div className="hidden md:flex items-center space-x-4">
-            <a href="/login" className="text-gray-700 hover:text-blue-900 font-medium rounded-md text-sm">
+            <a href="/login" className="px-4 py-2 bg-blue-100 text-gray-700 hover:text-blue-900 font-medium rounded-md text-sm">
               Login
             </a>
             <a href="/register" className="px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 text-sm font-medium shadow-md transition-colors">
@@ -63,7 +64,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-
+            {/* Navegação Mobile */}
       {isOpen && (
         <div className="md:hidden shadow-lg">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
@@ -72,7 +73,7 @@ const Navbar = () => {
                 {item.name}
               </a>
             ))}
-            <a href="/login" className="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium" onClick={() => setIsOpen(false)}>
+            <a href="/login" className="px-4 py-2 bg-blue-100 text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium" onClick={() => setIsOpen(false)}>
               Login
             </a>
             <a href="/register" className="block w-full text-left px-3 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 font-medium shadow-md transition-colors" onClick={() => setIsOpen(false)}>
@@ -254,7 +255,7 @@ const Personas = () => (
 );
 
 // --- Seção Requisitos Não Funcionais (Nossa Garantia) ---
-const nonFunctionalReqs = [
+const qualidades = [
   { icon: Zap, name: 'Desempenho', description: 'Tempo de resposta rápido para uma experiência fluida.' },
   { icon: Shield, name: 'Segurança', description: 'Proteção de dados pessoais com criptografia de ponta.' },
   { icon: CheckCircle, name: 'Usabilidade', description: 'Interface intuitiva e simplificada para todos os usuários.' },
@@ -272,7 +273,7 @@ const Qualidade = () => (
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {nonFunctionalReqs.map((req) => (
+        {qualidades.map((req) => (
           <div key={req.name} className="text-center p-6">
             <div className="flex items-center justify-center h-16 w-16 bg-green-100 text-green-600 rounded-full mb-6 mx-auto">
               <req.icon className="h-8 w-8" />
