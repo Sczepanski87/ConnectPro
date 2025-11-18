@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link, useNavigate} from 'react-router-dom'; 
 import { Mail, Lock, LogIn, User } from 'lucide-react';
 
 
@@ -13,12 +13,12 @@ const Logo = () => (
   </Link>
 );
 
-// Renomeado de LoginScreen para LoginPage para corresponder ao nome do arquivo
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Lógica de autenticação aqui
-    alert('Tentativa de Login! (A lógica real seria implementada aqui)');
+    navigate('/job');
   };
 
   return (
@@ -61,7 +61,7 @@ const LoginPage = () => {
                 name="password"
                 id="password"
                 className="block w-full rounded-md border-gray-300 pl-10 pr-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm transition-all focus:outline-none focus:ring-2"
-                placeholder="••••••••"
+                placeholder="********"
                 required
               />
             </div>
@@ -89,8 +89,7 @@ const LoginPage = () => {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-md text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors shadow-lg"
-            >
+              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-md text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors shadow-lg">
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <LogIn className="h-5 w-5 text-blue-300 group-hover:text-blue-100 transition-colors" aria-hidden="true" />
               </span>

@@ -97,7 +97,7 @@ const Hero = () => (
         Uma plataforma e-commerce para conectar profissionais e empresas, otimizando o processo de recrutamento com filtros inteligentes para "matches" mais precisos.
       </p>
       <div className="py-5 mt-10 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-        <a href="/register" className="px-6 py-4 bg-blue-900 text-white rounded-lg hover:bg-blue-800 text-sm font-medium shadow-md transition-colors">
+        <a href="/register" className="px-6 py-4 bg-teal-500 text-white rounded-lg hover:bg-blue-800 text-sm font-medium shadow-md transition-colors">
           Cadastrar-se Agora
         </a>
       </div>
