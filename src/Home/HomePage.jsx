@@ -199,7 +199,7 @@ const Recursos = () => (
   </section>
 );
 
-// --- Seção Personas (Depoimentos) ---
+// --- Seção Personas ---
 const personas = [
   {
     name: 'Júlia Lima',
