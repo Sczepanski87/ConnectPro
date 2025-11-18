@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Lock, Building, Image as ImageIcon, FileText, DollarSign } from 'lucide-react';
+import { Mail, Lock, Building, Image as ImageIcon, FileText, DollarSign, User } from 'lucide-react';
 
 // --- Logotipo ---
 const Logo = () => (
@@ -16,6 +16,9 @@ const Logo = () => (
 const RegisterEmpresas = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
+    const [cnpj, setCnpj] = useState('');
+    const [password, setPassword] = useState('');
+    const [errors, setErrors] = useState({});
 
     // Efeito para criar a URL de pré-visualização da imagem (Logo da Empresa)
     useEffect(() => {
@@ -37,8 +40,23 @@ const RegisterEmpresas = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const newErrors = {};
+
+        // Validação simples do CNPJ: somente dígitos e 14 caracteres
+        const digits = (cnpj || '').replace(/\D/g, '');
+        if (!digits || digits.length !== 14) {
+            newErrors.cnpj = 'CNPJ inválido. Informe 14 dígitos.';
+        }
+
+        if (!password || password.trim().length < 6) {
+            newErrors.password = 'Senha obrigatória (mínimo 6 caracteres).';
+        }
+
+        setErrors(newErrors);
+        if (Object.keys(newErrors).length > 0) return;
+
         // Lógica de cadastro da empresa aqui
-        console.log('Tentativa de Cadastro de Empresa!');
+        console.log('Tentativa de Cadastro de Empresa!', { cnpj, password });
     };
 
     return (
@@ -143,21 +161,27 @@ const RegisterEmpresas = () => {
                         </div>
                     </div>
 
-                    {/* Email Corporativo */}
+                    {/* CNPJ Corporativo */}
                     <div>
-                        <label htmlFor="email" className="sr-only">Email Corporativo</label>
+                        <label htmlFor="cnpj" className="sr-only">CNPJ</label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <Mail className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                                <User className="h-5 w-5 text-gray-400" aria-hidden="true" />
                             </div>
                             <input
-                                type="email"
-                                name="email"
-                                id="email"
+                                type="text"
+                                name="cnpj"
+                                id="cnpj"
+                                inputMode="numeric"
+                                pattern="[0-9./-]{14,18}"
+                                value={cnpj}
+                                onChange={(e) => setCnpj(e.target.value)}
                                 className="block w-full rounded-md border-gray-300 pl-10 pr-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm transition-all focus:outline-none focus:ring-2"
-                                placeholder="rh@suaempresa.com"
+                                placeholder="00.000.000/0000-00"
+                                aria-invalid={errors.cnpj ? 'true' : 'false'}
                                 required
                             />
+                            {errors.cnpj && <p className="text-sm text-red-600 mt-1">{errors.cnpj}</p>}
                         </div>
                     </div>
 
@@ -172,24 +196,24 @@ const RegisterEmpresas = () => {
                                 type="password"
                                 name="password"
                                 id="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 className="block w-full rounded-md border-gray-300 pl-10 pr-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm transition-all focus:outline-none focus:ring-2"
                                 placeholder="Crie uma senha forte"
+                                aria-invalid={errors.password ? 'true' : 'false'}
                                 required
                             />
+                            {errors.password && <p className="text-sm text-red-600 mt-1">{errors.password}</p>}
                         </div>
                     </div>
-
-                    {/* Botão de Cadastro */}
                     <div>
-                        <Link
-                            to="/candidato"
+                        <button
+                            type="submit"
                             className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-colors shadow-lg">
                             Criar conta empresarial
-                        </Link>
+                        </button>
                     </div>
                 </form>
-
-                {/* Links de Rodapé */}
                 <p className="text-gray-700">
                     Já tem uma conta?{' '}
                     <Link to="/login" className="font-medium text-teal-600 hover:text-teal-500">
