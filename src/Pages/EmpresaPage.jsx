@@ -19,7 +19,7 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navItems = [
         { name: 'Home', href: '/' },
-        { name: 'Favoritos', href: ''},
+        { name: 'Favoritos', href: '/favoritos'},
         { name: 'Chat', href: '/chat'},
     ];
 

@@ -7,6 +7,7 @@ import RegisterUsuario from './Login/RegisterUsuario.jsx'
 import RegisterEmpresa from './Login/RegisterEmpresa.jsx'
 import EmpresaPage from './Pages/EmpresaPage.jsx'
 import CandidatoPage from './Pages/CandidatoPage.jsx'
+import Favoritos from './Pages/Favoritos.jsx'
 import ChatPage from './Chat/ChatPage.jsx'
 
 
@@ -20,6 +21,7 @@ function App() {
       <Route path="/registerempresa" element={<RegisterEmpresa />} />
       <Route path="/empresa" element={<EmpresaPage />} />
       <Route path="/candidato" element={<CandidatoPage />} />
+      <Route path="/favoritos" element={<Favoritos />} />
       <Route path="/chat" element={<ChatPage />} />
     </Routes>
   );
