@@ -115,7 +115,6 @@ export default function ChatEmpresa() {
   const deleteConversation = (id) => {
     setConversations(prev => {
       const next = prev.filter(c => c.id !== id);
-      // if the deleted conversation was selected, pick next available or null
       setSelectedConversation(prevSelected => {
         if (!prevSelected) return null;
         if (prevSelected.id === id) return next.length ? next[0] : null;

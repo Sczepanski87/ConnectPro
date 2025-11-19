@@ -198,9 +198,9 @@ const CandidateCard = ({ candidate }) => {
                             </span>
                         )}
                     </div>
-                    <button className="px-4 py-2 bg-blue-900 text-white text-sm font-medium rounded-lg hover:bg-blue-800 shadow-sm transition-colors">
+                    <Link to="/chatusuario" className="px-4 py-2 bg-blue-900 text-white text-sm font-medium rounded-lg hover:bg-blue-800 shadow-sm transition-colors">
                         Mensagem
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>
