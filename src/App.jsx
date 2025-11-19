@@ -7,8 +7,10 @@ import RegisterUsuario from './Login/RegisterUsuario.jsx'
 import RegisterEmpresa from './Login/RegisterEmpresa.jsx'
 import EmpresaPage from './Pages/EmpresaPage.jsx'
 import CandidatoPage from './Pages/CandidatoPage.jsx'
-import Favoritos from './Pages/Favoritos.jsx'
-import ChatPage from './Chat/ChatPage.jsx'
+import FavoritosEmpresa from './Favoritos/FavoritosEmpresa.jsx'
+import FavoritosUsuario from './Favoritos/FavoritosUsuario.jsx'
+import ChatUsuarios from './Chat/ChatUsuario.jsx'
+import ChatEmpresa from './Chat/ChatEmpresa.jsx'
 
 
 function App() {
@@ -21,8 +23,10 @@ function App() {
       <Route path="/registerempresa" element={<RegisterEmpresa />} />
       <Route path="/empresa" element={<EmpresaPage />} />
       <Route path="/candidato" element={<CandidatoPage />} />
-      <Route path="/favoritos" element={<Favoritos />} />
-      <Route path="/chat" element={<ChatPage />} />
+      <Route path="/favoritosempresa" element={<FavoritosEmpresa />} />
+      <Route path="/favoritosusuario" element={<FavoritosUsuario />} />
+      <Route path="/chatusuario" element={<ChatUsuarios />} />
+      <Route path="/chatempresa" element={<ChatEmpresa />} />
     </Routes>
   );
 }

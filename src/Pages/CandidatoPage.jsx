@@ -17,8 +17,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navItems = [
     { name: 'Home', href: '/' },
-    { name: 'Favoritos', href: '/favoritos' },
-    { name: 'Mensagens', href: '/chat' },
+    { name: 'Favoritos', href: '/favoritosusuario' },
+    { name: 'Mensagens', href: '/chatusuario' },
   ];
 
   return (
@@ -199,7 +199,7 @@ const CandidateCard = ({ candidate }) => {
                         )}
                     </div>
                     <button className="px-4 py-2 bg-blue-900 text-white text-sm font-medium rounded-lg hover:bg-blue-800 shadow-sm transition-colors">
-                        Ver Perfil
+                        Mensagem
                     </button>
                 </div>
             </div>
@@ -211,13 +211,11 @@ const CandidateCard = ({ candidate }) => {
 const FiltersSidebar = ({
     roles, selectedRoles, toggleRole,
     levels, selectedLevels, toggleLevel,
-    skills, selectedSkills, toggleSkill,
-    clearFilters, applyFilters
+    skills, selectedSkills, toggleSkill, clearFilters, applyFilters
 }) => (
     <div className="w-full space-y-6">
         <div className="flex items-center justify-between">
              <h3 className="text-2xl font-bold text-blue-900">Filtros</h3>
-             <button onClick={clearFilters} className="text-sm text-teal-600 hover:underline font-medium">Limpar</button>
         </div>
        
         {/* Filtro por Cargo */}
@@ -276,9 +274,14 @@ const FiltersSidebar = ({
             </div>
         </div>
 
-        <button onClick={applyFilters} className="w-full py-3 px-4 bg-blue-900 text-white font-bold rounded-lg hover:bg-blue-800 transition-colors shadow-md">
-            Aplicar Filtros
-        </button>
+        <div className="flex gap-3">
+            <button onClick={clearFilters} className="flex-1 py-2 px-4 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
+                Limpar Filtros
+            </button>
+            <button onClick={applyFilters} className="flex-1 py-2 px-4 bg-blue-600 border border-gray-300 text-white font-semibold rounded-lg hover:bg-blue-400 transition-colors">
+                Aplicar
+            </button>
+        </div>
     </div>
 );
 
@@ -295,8 +298,7 @@ export default function CandidatePage() {
     const [selectedSkills, setSelectedSkills] = useState([]);
     const [filteredCandidates, setFilteredCandidates] = useState(mockCandidates);
 
-    // Helpers de toggle
-    const toggleSelection = (item, list, setList) => {
+   const toggleSelection = (item, list, setList) => {
         setList(prev => prev.includes(item) ? prev.filter(i => i !== item) : [...prev, item]);
     };
 
@@ -317,13 +319,14 @@ export default function CandidatePage() {
             results = results.filter(c => 
                 c.name.toLowerCase().includes(k) || 
                 c.bio.toLowerCase().includes(k) ||
-                c.role.toLowerCase().includes(k)
+                c.role.toLowerCase().includes(k) ||
+                (Array.isArray(c.skills) && c.skills.some(skill => skill.toLowerCase().includes(k)))
             );
         }
 
         // Filtro por Cargo (Match parcial no texto do cargo)
         if (selectedRoles.length > 0) {
-            results = results.filter(c => selectedRoles.some(role => c.role.includes(role) || (role === 'Dados' && c.role.includes('Dados')))); // Lógica simplificada
+            results = results.filter(c => selectedRoles.some(role => c.role.includes(role) || (role === 'Dados' && c.role.includes('Dados'))));
         }
 
         // Filtro por Nível

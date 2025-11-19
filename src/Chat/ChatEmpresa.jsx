@@ -19,10 +19,10 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   // Adicionado "Mensagens"
   const navItems = [
-    { name: 'Solução', href: '/#solucao' },
-    { name: 'Público-Alvo', href: '/#publico' },
-    { name: 'Depoimentos', href: '/#personas' },
-    { name: 'Vagas', href: '/job' },
+    { name: 'Home', href: '/' },
+    { name: 'Vagas', href: '/empresa' },
+    { name: 'Favoritos', href: '/favoritosempresa' },
+    
   ];
 
   return (
@@ -106,7 +106,7 @@ const messagesMock = [
   { id: 3, sender: 'company', text: 'Perfeito. Podemos agendar para amanhã, às 14h?', time: '10:33' },
 ];
 
-export default function ChatPage() {
+export default function ChatUsuario() {
   const [conversations, setConversations] = useState(initialConversations);
   const [selectedConversation, setSelectedConversation] = useState(initialConversations[0] || null);
   const [messages, setMessages] = useState(messagesMock);
