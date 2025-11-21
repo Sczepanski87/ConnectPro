@@ -31,55 +31,51 @@ const Navbar = () => {
     return location.pathname === path;
   };
 
-  return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 relative">
-          
-          <div className="flex-shrink-0">
-            <Logo />
-          </div>
-
-          <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 space-x-8">
-            {navItems.map((item) => (
-              <Link 
-                key={item.name} 
-                to={item.href} 
-                className={`text-sm font-medium rounded-md transition-colors ${
-                    isActive(item.href) && !item.href.startsWith('#') // Destaca se for a página ativa (excluindo âncoras puras na mesma página por enquanto para evitar múltiplos destaques)
-                    ? 'text-blue-700 font-bold' 
-                    : 'text-gray-700 hover:text-blue-900'
-                }`}
-              > 
-                {item.name} 
-              </Link> 
-            ))}
-          </div>
-
-          <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100">
-              <span className="sr-only">Abrir menu</span>
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {isOpen && (
-        <div className="md:hidden shadow-lg">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navItems.map((item) => (
-              <Link key={item.name} to={item.href} className="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium" onClick={() => setIsOpen(false)}>
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-    </nav>
-  );
-};
-
+   return (
+           <nav className="bg-white shadow-sm sticky top-0 z-50">
+             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+               <div className="flex items-center justify-between h-20 relative">
+                 <div className="flex-shrink-0"><Logo /></div>
+                 
+                 <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 space-x-8">
+                   {navItems.map((item) => (
+                     <Link key={item.name} to={item.href} className="text-gray-700 hover:text-blue-900 font-medium rounded-md text-sm"> 
+                       {item.name} 
+                     </Link> 
+                   ))}
+                 </div>
+       
+                 <div className="hidden md:flex items-center space-x-4">
+                   <Link to="/perfil" className="flex items-center gap-2 text-blue-900 font-bold">
+                       <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center border border-blue-200">
+                           JL
+                       </div>
+                       <span className="text-sm">Júlia Lima</span>
+                   </Link>
+                 </div>
+       
+                 <div className="md:hidden">
+                   <button onClick={() => setIsOpen(!isOpen)} className="p-2 rounded-md text-gray-600 hover:bg-gray-100">
+                     {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                   </button>
+                 </div>
+               </div>
+             </div>
+             {isOpen && (
+               <div className="md:hidden shadow-lg bg-white px-2 pt-2 pb-3 space-y-1">
+                   {navItems.map((item) => (
+                     <Link key={item.name} to={item.href} className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100" onClick={() => setIsOpen(false)}>
+                       {item.name}
+                     </Link>
+                   ))}
+                   <Link to="/perfil" className="block px-3 py-2 rounded-md text-base font-medium text-blue-900 bg-blue-50" onClick={() => setIsOpen(false)}>
+                       Meu Perfil
+                   </Link>
+               </div>
+             )}
+           </nav>
+         );
+       };
 // --- Footer (Copiado) ---
 const Footer = () => (
   <footer className="bg-blue-100 text-white">

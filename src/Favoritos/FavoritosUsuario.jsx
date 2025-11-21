@@ -4,7 +4,6 @@ import {
   Menu, X, MapPin, Briefcase, Bookmark, Trash2, User, CheckCircle
 } from 'lucide-react';
 
-// --- Logotipo ---
 const Logo = () => (
   <Link to="/" className="text-3xl font-bold cursor-pointer">
     <span className="text-blue-900">Connect</span>
@@ -12,7 +11,6 @@ const Logo = () => (
   </Link>
 );
 
-// --- Navbar (Copiada e Atualizada) ---
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navItems = [
@@ -23,64 +21,64 @@ const Navbar = () => {
   ];
 
   const isActive = (path) => {
-    // Para links da Home (/#...), verifica se estamos na raiz '/'
     if (path.startsWith('/#') || path.startsWith('#')) {
-        return location.pathname === '/';
+      return location.pathname === '/';
     }
-    // Para outras páginas, verifica correspondência exata do caminho
     return location.pathname === path;
   };
 
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 relative">
-          
-          <div className="flex-shrink-0">
-            <Logo />
-          </div>
+          <nav className="bg-white shadow-sm sticky top-0 z-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center justify-between h-20 relative">
+                <div className="flex-shrink-0"><Logo /></div>
+                
+                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 space-x-8">
+                  {navItems.map((item) => (
+                    <Link key={item.name} to={item.href} className="text-gray-700 hover:text-blue-900 font-medium rounded-md text-sm"> 
+                      {item.name} 
+                    </Link> 
+                  ))}
+                </div>
+      
+                <div className="hidden md:flex items-center space-x-4">
+                  <Link to="/perfil" className="flex items-center gap-2 text-blue-900 font-bold">
+                      <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center border border-blue-200">
+                          JL
+                      </div>
+                      <span className="text-sm">Júlia Lima</span>
+                  </Link>
+                </div>
+      
+                <div className="md:hidden">
+                  <button onClick={() => setIsOpen(!isOpen)} className="p-2 rounded-md text-gray-600 hover:bg-gray-100">
+                    {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                  </button>
+                </div>
+              </div>
+            </div>
+            {isOpen && (
+              <div className="md:hidden shadow-lg bg-white px-2 pt-2 pb-3 space-y-1">
+                  {navItems.map((item) => (
+                    <Link key={item.name} to={item.href} className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100" onClick={() => setIsOpen(false)}>
+                      {item.name}
+                    </Link>
+                  ))}
+                  <Link to="/perfil" className="block px-3 py-2 rounded-md text-base font-medium text-blue-900 bg-blue-50" onClick={() => setIsOpen(false)}>
+                      Meu Perfil
+                  </Link>
+              </div>
+            )}
+          </nav>
+        );
+      };
 
-          <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 space-x-8">
-            {navItems.map((item) => (
-              <Link 
-                key={item.name} 
-                to={item.href} 
-                className={`text-sm font-medium rounded-md transition-colors ${
-                    isActive(item.href) && !item.href.startsWith('#') // Destaca se for a página ativa (excluindo âncoras puras na mesma página por enquanto para evitar múltiplos destaques)
-                    ? 'text-blue-700 font-bold' 
-                    : 'text-gray-700 hover:text-blue-900'
-                }`}
-              > 
-                {item.name} 
-              </Link> 
-            ))}
-          </div>
+// --- Mock Data: Candidatos ---
+const initialSavedCandidates = [
+  { id: 1, name: 'Júlia Lima', role: 'Desenvolvedora Front-End', avatar: 'https://placehold.co/100x100/e8f4f8/000000?text=JL', skills: ['React', 'JavaScript', 'TailwindCSS'], available: true },
+  { id: 4, name: 'Lucas Pereira', role: 'Engenheiro de Dados', avatar: 'https://placehold.co/100x100/fffbeb/000000?text=LP', skills: ['Python', 'Spark', 'SQL', 'Azure'], available: true },
+];
 
-          <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100">
-              <span className="sr-only">Abrir menu</span>
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {isOpen && (
-        <div className="md:hidden shadow-lg">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navItems.map((item) => (
-              <Link key={item.name} to={item.href} className="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium" onClick={() => setIsOpen(false)}>
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-    </nav>
-  );
-};
-
-// --- Componente Card de Candidato (Simplificado para Favoritos) ---
 const CandidateCard = ({ item, onRemove }) => (
   <div className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all p-6 relative group">
     <div className="flex items-start justify-between">
@@ -118,17 +116,11 @@ const CandidateCard = ({ item, onRemove }) => (
   </div>
 );
 
-const initialSavedCandidates = [
-  { id: 1, name: 'Júlia Lima', role: 'Desenvolvedora Front-End', avatar: 'https://placehold.co/100x100/e8f4f8/000000?text=JL', skills: ['React', 'JavaScript', 'TailwindCSS'], available: true },
-  { id: 4, name: 'Lucas Pereira', role: 'Engenheiro de Dados', avatar: 'https://placehold.co/100x100/fffbeb/000000?text=LP', skills: ['Python', 'Spark', 'SQL', 'Azure'], available: true },
-];
-
-
 export default function FavoritesPage() {
-  const [activeTab, setActiveTab] = useState('jobs'); // 'jobs' ou 'candidates'
+  const [activeTab, setActiveTab] = useState('candidates');
   const [savedCandidates, setSavedCandidates] = useState(initialSavedCandidates);
 
-  const removeCandidate = (id) => setSavedCandidates(prev => prev.filter(cand => cand.id !== id));
+  const removeCandidate = (id) => setSavedCandidates(prev => prev.filter(c => c.id !== id));
 
   return (
     <div className="bg-gray-50 min-h-screen font-sans antialiased">
@@ -137,7 +129,7 @@ export default function FavoritesPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-blue-900">Meus Favoritos</h1>
-          <p className="text-gray-600 mt-2">Gerencie os perfis que você salvou para acessar mais tarde.</p>
+          <p className="text-gray-600 mt-2">Gerencie as vagas e perfis que você salvou para acessar mais tarde.</p>
         </div>
 
         {/* Tabs */}
@@ -166,12 +158,13 @@ export default function FavoritesPage() {
               <div className="text-center py-16 bg-white rounded-xl border border-dashed border-gray-300">
                 <User className="h-12 w-12 text-gray-300 mx-auto mb-3" />
                 <h3 className="text-lg font-medium text-gray-900">Nenhum candidato salvo</h3>
-                <Link to="/candidates" className="text-teal-600 hover:underline mt-2 inline-block">Encontrar talentos</Link>
+                <Link to="/candidato" className="text-teal-600 hover:underline mt-2 inline-block">Encontrar talentos</Link>
               </div>
             )
           )}
         </div>
       </main>
+
       <footer className="bg-blue-100 text-white">
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center">

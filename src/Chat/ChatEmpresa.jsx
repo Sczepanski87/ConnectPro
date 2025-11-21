@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
+import {
   Menu, X, Send, Search, Paperclip, Trash, ChevronLeft, User
 } from 'lucide-react';
 
@@ -25,7 +25,7 @@ const Navbar = () => {
   const isActive = (path) => {
     // Para links da Home (/#...), verifica se estamos na raiz '/'
     if (path.startsWith('/#') || path.startsWith('#')) {
-        return location.pathname === '/';
+      return location.pathname === '/';
     }
     // Para outras páginas, verifica correspondência exata do caminho
     return location.pathname === path;
@@ -35,45 +35,42 @@ const Navbar = () => {
     <nav className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 relative">
-          
-          <div className="flex-shrink-0">
-            <Logo />
-          </div>
+          <div className="flex-shrink-0"><Logo /></div>
 
           <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 space-x-8">
             {navItems.map((item) => (
-              <Link 
-                key={item.name} 
-                to={item.href} 
-                className={`text-sm font-medium rounded-md transition-colors ${
-                    isActive(item.href) && !item.href.startsWith('#') // Destaca se for a página ativa (excluindo âncoras puras na mesma página por enquanto para evitar múltiplos destaques)
-                    ? 'text-blue-700 font-bold' 
-                    : 'text-gray-700 hover:text-blue-900'
-                }`}
-              > 
-                {item.name} 
-              </Link> 
+              <Link key={item.name} to={item.href} className="text-gray-700 hover:text-blue-900 font-medium rounded-md text-sm">
+                {item.name}
+              </Link>
             ))}
           </div>
 
+          <div className="hidden md:flex items-center space-x-4">
+            <Link to="/perfil" className="flex items-center gap-2 text-blue-900 font-bold">
+              <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center border border-blue-200">
+                JL
+              </div>
+              <span className="text-sm">Júlia Lima</span>
+            </Link>
+          </div>
+
           <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100">
-              <span className="sr-only">Abrir menu</span>
+            <button onClick={() => setIsOpen(!isOpen)} className="p-2 rounded-md text-gray-600 hover:bg-gray-100">
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
       </div>
-
       {isOpen && (
-        <div className="md:hidden shadow-lg">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navItems.map((item) => (
-              <Link key={item.name} to={item.href} className="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium" onClick={() => setIsOpen(false)}>
-                {item.name}
-              </Link>
-            ))}
-          </div>
+        <div className="md:hidden shadow-lg bg-white px-2 pt-2 pb-3 space-y-1">
+          {navItems.map((item) => (
+            <Link key={item.name} to={item.href} className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100" onClick={() => setIsOpen(false)}>
+              {item.name}
+            </Link>
+          ))}
+          <Link to="/perfil" className="block px-3 py-2 rounded-md text-base font-medium text-blue-900 bg-blue-50" onClick={() => setIsOpen(false)}>
+            Meu Perfil
+          </Link>
         </div>
       )}
     </nav>
@@ -152,7 +149,7 @@ export default function ChatUsuario() {
       text: newMessage,
       time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
     };
-    
+
     setMessages([...messages, newMsg]);
     setNewMessage('');
   };
@@ -207,7 +204,7 @@ export default function ChatUsuario() {
                   {/* Header do Chat */}
                   <div className="flex items-center justify-between p-4 bg-white border-b border-gray-200 shadow-sm">
                     <div className="flex items-center">
-                      <button 
+                      <button
                         className="md:hidden mr-4 text-gray-600 hover:text-gray-900"
                         onClick={() => setSelectedConversation(null)}>
                         <ChevronLeft className="h-6 w-6" />
@@ -248,8 +245,8 @@ export default function ChatUsuario() {
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
                         placeholder="Digite sua mensagem..."
-                        className="flex-1 h-12 px-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-                      <button 
+                        className="flex-1 h-12 px-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                      <button
                         type="submit"
                         className="w-12 h-12 bg-blue-900 text-white rounded-full flex items-center justify-center flex-shrink-0 hover:bg-blue-800 transition-colors shadow-lg">
                         <Send className="h-5 w-5" />
