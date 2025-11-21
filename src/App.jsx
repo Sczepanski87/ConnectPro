@@ -6,7 +6,7 @@ import RegisterPage from './Login/RegisterPage.jsx';
 import RegisterUsuario from './Login/RegisterUsuario.jsx'
 import RegisterEmpresa from './Login/RegisterEmpresa.jsx'
 import EmpresaPage from './Pages/EmpresaPage.jsx'
-import CandidatoPage from './Pages/CandidatoPage.jsx'
+import UsuarioPage from './Pages/UsuarioPage.jsx'
 import FavoritosEmpresa from './Favoritos/FavoritosEmpresa.jsx'
 import FavoritosUsuario from './Favoritos/FavoritosUsuario.jsx'
 import ChatUsuarios from './Chat/ChatUsuario.jsx'
@@ -22,7 +22,7 @@ function App() {
       <Route path="/registerusuario" element={<RegisterUsuario />} />
       <Route path="/registerempresa" element={<RegisterEmpresa />} />
       <Route path="/empresa" element={<EmpresaPage />} />
-      <Route path="/candidato" element={<CandidatoPage />} />
+      <Route path="/usuario" element={<UsuarioPage />} />
       <Route path="/favoritosempresa" element={<FavoritosEmpresa />} />
       <Route path="/favoritosusuario" element={<FavoritosUsuario />} />
       <Route path="/chatusuario" element={<ChatUsuarios />} />

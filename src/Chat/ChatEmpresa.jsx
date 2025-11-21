@@ -5,7 +5,6 @@ import {
 } from 'lucide-react';
 
 // --- Logotipo ---
-// Copiado da HomePage para não usar arquivo compartilhado
 const Logo = () => (
   <Link to="/" className="text-3xl font-bold cursor-pointer">
     <span className="text-blue-900">Connect</span>
@@ -13,17 +12,24 @@ const Logo = () => (
   </Link>
 );
 
-// --- Componente Navbar ---
-// Copiado da HomePage e atualizado com o link "Mensagens"
+// --- Navbar (Copiada e Atualizada) ---
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // Adicionado "Mensagens"
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'Vagas', href: '/empresa' },
     { name: 'Favoritos', href: '/favoritosempresa' },
-    
+    { name: 'Mensagens', href: '/chatempresa' },
   ];
+
+  const isActive = (path) => {
+    // Para links da Home (/#...), verifica se estamos na raiz '/'
+    if (path.startsWith('/#') || path.startsWith('#')) {
+        return location.pathname === '/';
+    }
+    // Para outras páginas, verifica correspondência exata do caminho
+    return location.pathname === path;
+  };
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
@@ -36,9 +42,20 @@ const Navbar = () => {
 
           <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 space-x-8">
             {navItems.map((item) => (
-              <Link key={item.name} to={item.href} className="text-gray-700 hover:text-blue-900 font-medium rounded-md text-sm"> {item.name} </Link> 
+              <Link 
+                key={item.name} 
+                to={item.href} 
+                className={`text-sm font-medium rounded-md transition-colors ${
+                    isActive(item.href) && !item.href.startsWith('#') // Destaca se for a página ativa (excluindo âncoras puras na mesma página por enquanto para evitar múltiplos destaques)
+                    ? 'text-blue-700 font-bold' 
+                    : 'text-gray-700 hover:text-blue-900'
+                }`}
+              > 
+                {item.name} 
+              </Link> 
             ))}
           </div>
+
           <div className="md:hidden">
             <button onClick={() => setIsOpen(!isOpen)} className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100">
               <span className="sr-only">Abrir menu</span>
