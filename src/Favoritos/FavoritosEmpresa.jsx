@@ -157,40 +157,41 @@ export default function FavoritesPage() {
             ) : (
               <div className="text-center py-16 bg-white rounded-xl border border-dashed border-gray-300">
                 <User className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-                <h3 className="text-lg font-medium text-gray-900">Nenhum candidato salvo</h3>
-                <Link to="/candidato" className="text-teal-600 hover:underline mt-2 inline-block">Encontrar talentos</Link>
+                <h3 className="text-lg font-medium text-gray-900">Nenhuma vaga salva</h3>
+                <Link to="/empresa" className="text-teal-600 hover:underline mt-2 inline-block">Encontrar Vagas</Link>
               </div>
             )
           )}
         </div>
       </main>
-
-      <footer className="bg-blue-100 text-white">
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-6 md:mb-0">
-              <Logo />
-              <p className="mt-4 text-blue-900 max-w-xs">
-                Conectando talentos ao futuro
-              </p>
-            </div>
-            <div className="text-center md:text-right">
-              <h4 className="text-lg font-semibold text-blue-900">Projeto Integrado - 2º Semestre</h4>
-              <p className="text-blue-900">Análise e Desenvolvimento de Sistemas</p>
-              <p className="text-blue-900">Unisenac - Centro Universitário RS</p>
-              <div className="mt-4 text-sm text-blue-900">
-                <p>Desenvolvido por:</p>
-                <p>Brian da Silva Guterres</p>
-                <p>Victor Sczepanski Pereira</p>
-                <p>Frederico Marten Brião</p>
-              </div>
-            </div>
+  <footer className="bg-blue-100 text-white">
+    <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col md:flex-row md:justify-between items-center text-center md:text-left">
+        <div className="mb-6 md:mb-0 w-full md:w-auto">
+          <div className="flex justify-center md:justify-start">
+            <Logo />
           </div>
-          <div className="flex text-center text-blue-900 text-sm">
-            <p>&copy; {new Date().getFullYear()} ConnectPro. Todos os direitos reservados.</p>
+          <p className="mt-4 text-blue-900 max-w-xs mx-auto md:mx-0">
+            Conectando talentos ao futuro
+          </p>
+        </div>
+        <div className="text-center md:text-right w-full md:w-auto">
+          <h4 className="text-lg font-semibold text-blue-900">Projeto Integrado - 2º Semestre</h4>
+          <p className="text-blue-900">Análise e Desenvolvimento de Sistemas</p>
+          <p className="text-blue-900">Unisenac - Centro Universitário RS</p>
+          <div className="mt-4 text-sm text-blue-900">
+            <p>Desenvolvido por:</p>
+            <p>Brian da Silva Guterres</p>
+            <p>Victor Sczepanski Pereira</p>
+            <p>Frederico Marten Brião</p>
           </div>
         </div>
-      </footer>
+      </div>
+      <div className="flex justify-center text-blue-900 text-sm mt-6">
+        <p>&copy; {new Date().getFullYear()} ConnectPro. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
     </div>
   );
 }

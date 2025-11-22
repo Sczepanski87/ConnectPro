@@ -17,7 +17,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navItems = [
     { name: 'Home', href: '/' },
-    { name: 'Vagas', href: '/candidato' },
+    { name: 'Vagas', href: '/usuario' },
     { name: 'Favoritos', href: '/favoritosusuario' },
     { name: 'Mensagens', href: '/chatusuario' },
   ];
@@ -80,14 +80,16 @@ const Navbar = () => {
 const Footer = () => (
   <footer className="bg-blue-100 text-white">
     <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-      <div className="flex flex-col md:flex-row justify-between items-center">
-        <div className="mb-6 md:mb-0">
-          <Logo />
-          <p className="mt-4 text-blue-900 max-w-xs">
+      <div className="flex flex-col md:flex-row md:justify-between items-center text-center md:text-left">
+        <div className="mb-6 md:mb-0 w-full md:w-auto">
+          <div className="flex justify-center md:justify-start">
+            <Logo />
+          </div>
+          <p className="mt-4 text-blue-900 max-w-xs mx-auto md:mx-0">
             Conectando talentos ao futuro
           </p>
         </div>
-        <div className="text-center md:text-right">
+        <div className="text-center md:text-right w-full md:w-auto">
           <h4 className="text-lg font-semibold text-blue-900">Projeto Integrado - 2º Semestre</h4>
           <p className="text-blue-900">Análise e Desenvolvimento de Sistemas</p>
           <p className="text-blue-900">Unisenac - Centro Universitário RS</p>
@@ -99,7 +101,7 @@ const Footer = () => (
           </div>
         </div>
       </div>
-      <div className="flex text-center text-blue-900 text-sm">
+      <div className="flex justify-center text-blue-900 text-sm mt-6">
         <p>&copy; {new Date().getFullYear()} ConnectPro. Todos os direitos reservados.</p>
       </div>
     </div>
