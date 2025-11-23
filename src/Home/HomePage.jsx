@@ -118,7 +118,7 @@ const PublicoAlvo = () => (
         </p>
       </div>
       <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-        <div className="bg-gray-50 rounded-2xl shadow-lg p-8 transform transition-transform hover:scale-105">
+        <div className="bg-gray-50 rounded-2xl shadow-lg p-8 transform transition-transform hover:scale-105 flex flex-col items-center text-center">
           <div className="flex items-center justify-center h-16 w-16 bg-blue-900 text-white rounded-full mb-6">
             <Users className="h-8 w-8" />
           </div>
@@ -127,7 +127,7 @@ const PublicoAlvo = () => (
             Profissionais que desejam uma plataforma para divulgar suas qualificações, projetos e portfólios de forma detalhada, segura e eficiente, buscando se destacar no mercado.
           </p>
         </div>
-        <div className="bg-gray-50 rounded-2xl shadow-lg p-8 transform transition-transform hover:scale-105">
+        <div className="bg-gray-50 rounded-2xl shadow-lg p-8 transform transition-transform hover:scale-105 flex flex-col items-center text-center">
           <div className="flex items-center justify-center h-16 w-16 bg-teal-500 text-white rounded-full mb-6">
             <Briefcase className="h-8 w-8" />
           </div>

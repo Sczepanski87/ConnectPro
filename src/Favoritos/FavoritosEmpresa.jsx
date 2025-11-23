@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Menu, X, MapPin, Briefcase, Bookmark, Trash2, User, CheckCircle 
+  Menu, X, MapPin, Briefcase, Bookmark, Trash2, User, CheckCircle, Star
 } from 'lucide-react';
 
 const Logo = () => (
@@ -75,7 +75,7 @@ const Navbar = () => {
 
 
 // --- Componente Card de Vaga (Simplificado para Favoritos) ---
-const JobCard = ({ item, onRemove }) => (
+const JobCard = ({ item, onRemove, rating = 0, onRate }) => (
   <div className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all p-6 relative group">
     <div className="flex items-start justify-between">
       <div className="flex items-start space-x-4">
@@ -101,7 +101,18 @@ const JobCard = ({ item, onRemove }) => (
 
     <div className="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
         <span className="text-green-700 font-semibold text-sm">{item.salary}</span>
-        <Link to={`/jobs/${item.id}`} className="text-teal-600 hover:text-teal-800 text-sm font-medium">Ver Detalhes →</Link>
+        <div className="flex items-center gap-2">
+          {[1,2,3,4,5].map((i) => (
+            <button key={i} onClick={() => onRate && onRate(item.id, i)} className="p-0" aria-label={`Avaliar ${i} estrelas`}>
+              <Star
+                className={`h-6 w-6 inline-block transition-transform hover:scale-110 ${i <= rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                fill={i <= rating ? 'currentColor' : 'none'}
+                stroke={i <= rating ? 'none' : 'currentColor'}
+                strokeWidth={i <= rating ? 0 : 1.5}
+              />
+            </button>
+          ))}
+        </div>
     </div>
   </div>
 );
@@ -118,6 +129,15 @@ const initialSavedJobs = [
 export default function FavoritesPage() {
   const [activeTab, setActiveTab] = useState('jobs'); // default agora mostra candidatos
   const [savedJobs, setSavedJobs] = useState(initialSavedJobs);
+  const [ratings, setRatings] = useState(() => {
+    const map = {};
+    initialSavedJobs.forEach((j) => { map[j.id] = 1; });
+    return map;
+  });
+
+  const handleRate = (id, value) => {
+    setRatings(prev => ({ ...prev, [id]: value }));
+  };
 
   const removeJob = (id) => setSavedJobs(prev => prev.filter(job => job.id !== id));
 
@@ -151,7 +171,7 @@ export default function FavoritesPage() {
             savedJobs.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {savedJobs.map(job => (
-                  <JobCard key={job.id} item={job} onRemove={removeJob} />
+                  <JobCard key={job.id} item={job} onRemove={removeJob} rating={ratings[job.id] || 0} onRate={handleRate} />
                 ))}
               </div>
             ) : (

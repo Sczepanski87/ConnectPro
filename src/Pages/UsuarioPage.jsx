@@ -17,7 +17,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navItems = [
     { name: 'Home', href: '/' },
-    { name: 'Vagas', href: '/usuario' },
+    { name: 'Vagas', href: '/empresa' },
+    { name: 'Candidatos', href: '/usuario' },
     { name: 'Favoritos', href: '/favoritosusuario' },
     { name: 'Mensagens', href: '/chatusuario' },
   ];
@@ -162,8 +163,8 @@ const CandidateCard = ({ candidate }) => {
     const [isBookmarked, setIsBookmarked] = useState(false);
 
     return (
-        <div className="bg-white border border-gray-200 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden">
-            <div className="p-6">
+        <div className="bg-white border border-gray-200 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden flex flex-col h-full">
+            <div className="p-6 flex-1 flex flex-col">
                 <div className="flex items-start justify-between">
                     <div className="flex items-center space-x-4">
                         <img src={candidate.avatar} alt={candidate.name} className="h-16 w-16 rounded-full border-2 border-gray-100" />
@@ -205,18 +206,16 @@ const CandidateCard = ({ candidate }) => {
                     ))}
                 </div>
 
-                <div className="mt-6 flex items-center justify-between">
-                    <div className="flex items-center">
-                        {candidate.available ? (
-                            <span className="flex items-center text-green-600 text-xs font-bold bg-green-50 px-2 py-1 rounded-full">
-                                <CheckCircle className="h-3 w-3 mr-1" /> Disponível
-                            </span>
-                        ) : (
-                            <span className="text-gray-400 text-xs font-medium bg-gray-50 px-2 py-1 rounded-full">
-                                Indisponível
-                            </span>
-                        )}
-                    </div>
+                <div className="mt-auto pt-6 flex items-center justify-between">
+                    {candidate.available ? (
+                        <span className="flex items-center text-green-600 text-xs font-bold bg-green-50 px-2 py-1 rounded-full">
+                            <CheckCircle className="h-3 w-3 mr-1" /> Disponível
+                        </span>
+                    ) : (
+                        <span className="text-gray-400 text-xs font-medium bg-gray-50 px-2 py-1 rounded-full">
+                            Indisponível
+                        </span>
+                    )}
                     <Link to="/chatusuario" className="px-4 py-2 bg-blue-900 text-white text-sm font-medium rounded-lg hover:bg-blue-800 shadow-sm transition-colors">
                         Mensagem
                     </Link>
@@ -448,7 +447,7 @@ export default function CandidatePage() {
                             </div>
                             
                             {filteredCandidates.length > 0 ? (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
                                     {filteredCandidates.map(candidate => (
                                         <CandidateCard key={candidate.id} candidate={candidate} />
                                     ))}

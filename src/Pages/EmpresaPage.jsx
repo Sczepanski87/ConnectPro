@@ -18,6 +18,7 @@ const Navbar = () => {
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'Vagas', href: '/empresa' },
+    { name: 'Candidatos', href: '/usuario' },
     { name: 'Favoritos', href: '/favoritosempresa' },
     { name: 'Mensagens', href: '/chatempresa' },
   ];
@@ -161,8 +162,8 @@ const CompanyCard = ({ company }) => {
     const [isBookmarked, setIsBookmarked] = useState(false);
 
     return (
-        <div className="bg-white border border-gray-200 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden">
-            <div className="p-6">
+        <div className="bg-white border border-gray-200 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden flex flex-col h-full">
+            <div className="p-6 flex-1 flex flex-col">
                 <div className="flex items-start justify-between">
                     <div className="flex items-center space-x-4">
                         <img src={company.avatar} alt={company.name} className="h-16 w-16 rounded-full border-2 border-gray-100" />
@@ -204,7 +205,7 @@ const CompanyCard = ({ company }) => {
                     ))}
                 </div>
 
-                <div className="mt-6 flex items-center justify-between">
+                <div className="mt-auto pt-6 flex items-center justify-between">
                     <div className="flex items-center">
                         {company.available ? (
                             <span className="flex items-center text-green-600 text-xs font-bold bg-green-50 px-2 py-1 rounded-full">
@@ -448,7 +449,7 @@ export default function EmpresaPage() {
                             </div>
                             
                             {filteredCompanies.length > 0 ? (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
                                     {filteredCompanies.map(company => (
                                         <CompanyCard key={company.id} company={company} />
                                     ))}

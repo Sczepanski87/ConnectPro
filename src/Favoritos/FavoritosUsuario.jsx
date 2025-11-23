@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Menu, X, MapPin, Briefcase, Bookmark, Trash2, User, CheckCircle
+  Menu, X, MapPin, Briefcase, Bookmark, Trash2, User, CheckCircle, Star
 } from 'lucide-react';
 
 const Logo = () => (
@@ -79,7 +79,7 @@ const initialSavedCandidates = [
   { id: 4, name: 'Lucas Pereira', role: 'Engenheiro de Dados', avatar: 'https://placehold.co/100x100/fffbeb/000000?text=LP', skills: ['Python', 'Spark', 'SQL', 'Azure'], available: true },
 ];
 
-const CandidateCard = ({ item, onRemove }) => (
+const CandidateCard = ({ item, onRemove, rating = 0, onRate }) => (
   <div className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all p-6 relative group">
     <div className="flex items-start justify-between">
       <div className="flex items-center space-x-4">
@@ -111,7 +111,25 @@ const CandidateCard = ({ item, onRemove }) => (
           <CheckCircle className="h-3 w-3" /> Disponível
         </span>
       ) : <span></span>}
-      <button className="text-blue-900 hover:text-blue-700 text-sm font-medium">Ver Perfil →</button>
+      <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1">
+          {[1,2,3,4,5].map((i) => (
+            <button
+              key={i}
+              onClick={() => onRate && onRate(item.id, i)}
+              className="p-1"
+              aria-label={`Avaliar ${i} estrelas`}
+            >
+              <Star
+                className={`h-6 w-6 inline-block transition-transform hover:scale-110 ${i <= rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                fill={i <= rating ? 'currentColor' : 'none'}
+                stroke={i <= rating ? 'none' : 'currentColor'}
+                strokeWidth={i <= rating ? 0 : 1.5}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 );
@@ -119,6 +137,15 @@ const CandidateCard = ({ item, onRemove }) => (
 export default function FavoritesPage() {
   const [activeTab, setActiveTab] = useState('candidates');
   const [savedCandidates, setSavedCandidates] = useState(initialSavedCandidates);
+  const [ratings, setRatings] = useState(() => {
+    const map = {};
+    initialSavedCandidates.forEach((c) => { map[c.id] = 1; });
+    return map;
+  });
+
+  const handleRate = (id, value) => {
+    setRatings(prev => ({ ...prev, [id]: value }));
+  };
 
   const removeCandidate = (id) => setSavedCandidates(prev => prev.filter(c => c.id !== id));
 
@@ -151,7 +178,7 @@ export default function FavoritesPage() {
             savedCandidates.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {savedCandidates.map(candidate => (
-                  <CandidateCard key={candidate.id} item={candidate} onRemove={removeCandidate} />
+                  <CandidateCard key={candidate.id} item={candidate} onRemove={removeCandidate} rating={ratings[candidate.id] || 0} onRate={handleRate} />
                 ))}
               </div>
             ) : (
