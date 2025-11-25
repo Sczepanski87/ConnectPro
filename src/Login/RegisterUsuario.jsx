@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'; // Importa useState e useEffect
 import { Link } from 'react-router-dom';
-import { Mail, Lock, User, UserPlus, Image } from 'lucide-react'; // Importa o ícone Image
+import { Mail, Lock, User, UserPlus, Image, Phone, Plus, X } from 'lucide-react'; // Importa ícones adicionais
 
 const Logo = () => (
   <Link to="/" className="flex items-center justify-center mb-8">
@@ -16,14 +16,30 @@ const RegisterPage = () => {
   // Estado para a imagem selecionada e a URL de pré-visualização
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+  // Novos campos: telefone, descrição, habilidades
+  const [phone, setPhone] = useState('');
+  const [description, setDescription] = useState('');
+  const [skills, setSkills] = useState([]);
+  const [newSkill, setNewSkill] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Lógica de cadastro aqui
-    // TODO: Adicionar lógica para fazer upload do 'selectedImage' 
-    // para um serviço de storage (como Firebase Storage, S3, etc.)
-    // e salvar a URL no perfil do usuário.
-    alert('Tentativa de Cadastro! (A lógica real, incluindo upload de imagem, seria implementada aqui)');
+    // Coleta os valores do formulário e dos estados locais
+    const form = e.target;
+    const payload = {
+      name: form.name.value,
+      email: form.email.value,
+      password: form.password.value,
+      phone,
+      description,
+      skills,
+      // Observação: `selectedImage` é um File; o upload real deve enviar para um storage
+      avatarFile: selectedImage || null,
+    };
+
+    // Para demonstração, apenas mostramos os dados no console
+    console.log('Payload de cadastro:', payload);
+    alert('cadastro realizado com sucesso!');
   };
 
   // Handler para quando o arquivo de imagem for selecionado
@@ -169,6 +185,77 @@ const RegisterPage = () => {
               <label htmlFor="terms" className="ml-2 block text-gray-900">
                 Eu aceito os <a href="#" className="font-medium text-blue-800 hover:text-blue-600">Termos de Uso</a>
               </label>
+            </div>
+          </div>
+
+          {/* Campos adicionais: Telefone, Descrição e Habilidades (movidos para dentro do formulário) */}
+          <div className="mt-2">
+            <h3 className="text-sm font-bold text-gray-900 mb-2">Informações adicionais</h3>
+
+            {/* Telefone */}
+            <div className="mb-4">
+              <label htmlFor="phone" className="sr-only">Telefone</label>
+              <div className="relative rounded-md shadow-sm">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <Phone className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                </div>
+                <input
+                  type="tel"
+                  name="phone"
+                  id="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="block w-full rounded-md border-gray-300 pl-10 pr-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm transition-all focus:outline-none focus:ring-2"
+                  placeholder="(11) 99999-9999"
+                />
+              </div>
+            </div>
+
+            {/* Descrição */}
+            <div className="mb-4">
+              <label htmlFor="description" className="sr-only">Descrição</label>
+              <textarea
+                id="description"
+                name="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                rows={4}
+                className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Conte um pouco sobre você, suas experiências e objetivos"
+              />
+            </div>
+
+            {/* Habilidades */}
+            <div className="mb-4">
+              <label className="sr-only">Habilidades</label>
+              <div className="flex flex-wrap gap-2 items-center mb-2">
+                {skills.map((s) => (
+                  <div key={s} className="flex items-center gap-2 bg-blue-50 text-blue-800 text-xs font-semibold px-2.5 py-1 rounded-md border border-blue-100">
+                    <span>{s}</span>
+                    <button type="button" onClick={() => setSkills((prev) => prev.filter((x) => x !== s))} className="text-blue-600 hover:text-blue-800">
+                      <X className="h-3 w-3" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex gap-2">
+                <input
+                  value={newSkill}
+                  onChange={(e) => setNewSkill(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); const v = newSkill.trim(); if (v && !skills.includes(v)) { setSkills((p) => [...p, v]); } setNewSkill(''); } }}
+                  className="flex-1 border border-gray-200 rounded-md px-2 py-1 text-sm"
+                  placeholder="Adicionar habilidade (pressione Enter)"
+                />
+                <button
+                  type="button"
+                  onClick={() => { const v = newSkill.trim(); if (!v) return; if (!skills.includes(v)) setSkills((p) => [...p, v]); setNewSkill(''); }}
+                  className="px-3 py-1 bg-teal-500 text-white rounded-md flex items-center gap-2"
+                >
+                  <Plus className="h-4 w-4" />
+                  Adicionar
+                </button>
+              </div>
             </div>
           </div>
 
